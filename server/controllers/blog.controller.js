@@ -27,7 +27,10 @@ export const getBlogs = async (req, res, next) => {
 export const getLoggedInBlogs = async (req, res, next) => {
   try {
     const userId = req.params.userId;
-    const posts = await Blog.find({ createdBy: userId });
+    const posts = await Blog.find({ createdBy: userId })
+      .populate("createdBy", ["userName"])
+      .sort({ createdAt: -1 })
+      .limit(10);
     res.json(posts);
   } catch (error) {
     next(error);

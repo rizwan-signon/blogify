@@ -24,7 +24,7 @@ const BlogCard = ({ blog }) => {
       </div>
       <div className="w-2/5 ">
         <img
-          src={blogImage}
+          src={`http://localhost:4000/${blog.image}`}
           alt="image"
           className="h-[200px] w-full object-cover rounded-lg"
         />
