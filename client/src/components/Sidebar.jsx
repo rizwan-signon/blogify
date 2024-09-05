@@ -54,7 +54,7 @@ const Sidebar = () => {
         </Link>
         <Link to="/home/createblog">
           <h1 className=" p-2 text-xl cursor-pointer rounded-lg w-full border text-center capitalize hover:bg-primary transition-all duration-300">
-            create blog
+            create new blog
           </h1>
         </Link>
         <h1

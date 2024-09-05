@@ -9,8 +9,13 @@ const MyBlogs = () => {
       {loggedInBlogs?.map((blog) => (
         <div
           key={blog?._id}
-          className="bg-gray-800  h-[300px] rounded-lg p-3 w-full flex justify-between flex-col"
+          className="bg-gray-800  h-[300px] rounded-lg p-3 w-full flex justify-between flex-col relative"
         >
+          <img
+            src={`http://localhost:4000/${blog?.image}`}
+            className=" h-1/4 object-cover"
+          />
+
           <div className="w-full">
             <h1 className="text-4xl font-medium capitalize truncate">
               {blog?.title}
@@ -18,7 +23,7 @@ const MyBlogs = () => {
             <p>createdBy @{blog?.createdBy?.userName}</p>
             <p className="text-xl line-clamp-4">{blog?.description}</p>
           </div>
-          <div className=" flex items-center justify-between">
+          <div className=" flex items-center gap-4 absolute top-3">
             <Trash className="opacity-20 hover:opacity-100 cursor-pointer" />
             <Pencil className="opacity-20 hover:opacity-100 cursor-pointer" />
           </div>

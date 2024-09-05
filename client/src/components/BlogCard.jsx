@@ -1,5 +1,5 @@
 import { addBlogs } from "@/statemanagement/slices/blog.slice";
-import blogImage from "../assets/images/hero.png.jpg";
+import moment from "moment";
 import { Trash2Icon, SquarePen } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { useToast } from "@/hooks/use-toast";
@@ -12,6 +12,11 @@ const BlogCard = ({ blog }) => {
       description: "visit latter to read ",
     });
     dispatch(addBlogs(blog));
+  };
+  const handleSingleBlog = async (blogId) => {
+    const response = await fetch(`'/api/singleblog/${blogId}`);
+    const data = await response.json();
+    console.log(data);
   };
   return (
     <div className="flex items-start gap-3 p-4 border m-4 rounded-lg relative mt-0">
@@ -30,11 +35,19 @@ const BlogCard = ({ blog }) => {
         />
       </div>
       <div className="w-3/5">
-        <h1 className="text-4xl font-bold capitalize">{blog.title}</h1>
+        <h1
+          onClick={() => handleSingleBlog(blog._id)}
+          className="text-4xl font-bold capitalize underline decoration-blue-700 underline-offset-8 text-blue-500 cursor-pointer my-2 truncate"
+        >
+          {blog.title}
+        </h1>
         <div className=" flex items-center gap-3">
           <h3 className="font-bold text-xl">@{blog.author}</h3>
-          <p>date 23/22/2024 6 pm</p>
+          <p className=" text-indigo-300">
+            {moment(blog.createdAt).endOf("day").fromNow()}
+          </p>
         </div>
+        <hr className="my-2" />
         <p className=" text-xl">{blog.description}</p>
       </div>
     </div>
